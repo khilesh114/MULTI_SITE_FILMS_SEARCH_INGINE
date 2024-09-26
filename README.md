@@ -19,5 +19,3 @@ This search engine helps users find movies across various websites, saving time 
 - Learn more about Google Dorks [here](https://www.exploit-db.com/google-hacking-database).
 - Warning: Do not misuse Google Dorks. This tool is only for ethical and legal purposes.
 
-## License
-(Add your license information here)
