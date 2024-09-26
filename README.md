@@ -11,7 +11,7 @@ This search engine helps users find movies across various websites, saving time 
 - **Filtering:** Filter search results according to your needs.
 
 ## How to Use
-1. Visit the website.
+1. Visit the website.  [here](https://khilesh114.github.io/MultiFilmFinder/).
 2. Enter the name of the movie you want to search for in the search bar.
 3. Select the appropriate website from the search results.
 
