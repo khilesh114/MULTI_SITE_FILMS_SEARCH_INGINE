@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiFilmFinder</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #33ff33;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 3em;
+            text-shadow: 0 0 10px #33ff33, 0 0 20px #00ff00;
+            z-index: 1;
+        }
+
+        .search-container {
+            text-align: center;
+            z-index: 1;
+        }
+
+        input[type="text"] {
+            width: 400px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 2px solid #33ff33;
+            background-color: #111;
+            color: #33ff33;
+            font-size: 18px;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 30px;
+            margin: 5px;
+            background-color: #111;
+            color: #33ff33;
+            border: 2px solid #33ff33;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 0 10px #00ff00;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #000;
+            color: #00ff00;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .matrix span {
+            position: absolute;
+            white-space: nowrap;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix"></div>
+    <div class="search-container">
+        <h1>Films Search Engine</h1>
+        <input type="text" id="searchInput" placeholder="Enter movie or name...">
+        
+        <div class="button-group">
+            <button onclick="searchOnSite1()">Low Level Search</button>
+            <button onclick="searchOnSite2()">High Level Search</button>
+            <button onclick="searchOnSite3()">Advanced Level Search</button>
+            <button onclick="customSearch()">Custom Search</button>
+            <button onclick="buyMeACoffee()">Buy Me a Coffee</button> 
+    </div>
+
+    <script>
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function createMatrixSpans() {
+            const matrixContainer = document.querySelector('.matrix');
+            const names = [
+                'Snaptube', 'Filmywap', 'Khatrimaza', 'Filmy4web',
+                'Worldfree4u', 'Mp4moviezsite', 'Bolly4uwebsite', 'MovieMad',
+                'downloadhub', '9xmovies', 'mkvcinemas', 'moviemad',
+                'bolly4u', 'mp4moviez', 'worldfree4u', 'filmyfly',
+                'thekhatrimaza', 'filmywap'
+            ];
+
+            names.forEach((name, index) => {
+                const span = document.createElement('span');
+                span.style.left = (index % 9) * 10 + '%';
+                span.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                span.textContent = name;
+                span.style.color = getRandomColor();
+                matrixContainer.appendChild(span);
+            });
+        }
+
+        window.onload = createMatrixSpans;
+
+        function searchOnSite1() {
+            var query = document.getElementById("searchInput").value;
+            if (query) {
+                var searchUrl = "https://www.google.com/search?q=" + encodeURIComponent(query) +
+                " site:bollyflix.beer OR" +
+                " site:bolly4u.shop OR" +
+                " site:downloadhub.contact OR" +
+                " site:9xmovies.com.vu OR" +
+                " site:mkvcinemas.cat OR" +
+                " site:moviemad.co.com OR" +
+                " site:mp4moviez.glass OR" +
+                " site:worldfree4u.helpsarkari.com OR" +
+                " site:filmyfly.wales OR" +
+                " site:thekhatrimaza.lol OR" +
+                " site:2filmywap.com OR" +
+                " site:filmyzilla.com.sl";
+                window.open(searchUrl, "_blank");
+                alert("Search  Success!");
+                window.location.href = "http://swatiai.likesyou.org/";
+            } else {
+                alert("Please enter something to search.");
+            }
+        }
+
+        function searchOnSite2() {
+            var query = document.getElementById("searchInput").value;
+            if (query) {
+                var searchUrl = "https://www.google.com/search?q=" + encodeURIComponent(query) +
+                " site:bollyflix.* OR" +
+                " site:bolly4u.* OR" +
+                " site:downloadhub.* OR" +
+                " site:9xmovies.com.* OR" +
+                " site:mkvcinemas.* OR" +
+                " site:moviemad.* OR" +
+                " site:mp4moviez.* OR" +
+                " site:worldfree4u.* OR" +
+                " site:filmyfly.* OR" +
+                " site:thekhatrimaza.* OR" +
+                " site:filmyzilla.*";
+                window.open(searchUrl, "_blank");
+                alert("Search Success!");
+                window.location.href = "http://swatiai.likesyou.org/";
+            } else {
+                alert("Please enter something to search.");
+            }
+        }
+
+        function searchOnSite3() {
+            var query = document.getElementById("searchInput").value;
+            if (query) {
+                var searchUrl = "https://www.google.com/search?q=" + encodeURIComponent(query) +
+                " site:*.bollyflix.* OR" +
+                " site:*.bolly4u.* OR" +
+                " site:*.downloadhub.* OR" +
+                " site:*.9xmovies.com.* OR" +
+                " site:*.mkvcinemas.* OR" +
+                " site:*.moviemad.* OR" +
+                " site:*.mp4moviez.* OR" +
+                " site:*.worldfree4u.* OR" +
+                " site:*.filmyfly.* OR" +
+                " site:*.thekhatrimaza.* OR" +
+                " site:*.filmyzilla.*";
+                window.open(searchUrl, "_blank");
+                alert("Search Success!");
+                window.location.href = "http://swatiai.likesyou.org/";
+
+                
+            } else {
+                alert("Please enter something to search.");
+            }
+        }
+
+        function customSearch() {
+            var query = document.getElementById("searchInput").value;
+            if (query) {
+                var searchQueries = [
+                    `intitle:"Hindi Dubbed Movie" "${query}"`,
+                    `filetype:mp4 "Hindi Dubbed Movie" "${query}"`,
+                    `inurl:dead "Hindi Dubbed Movie" "${query}"`,
+                    `inurl:watch "Hindi Dubbed Movie" "${query}"`,
+                    `inurl:stream "Hindi Dubbed Movie" "${query}"`,
+                    `filetype:torrent "Hindi Dubbed Movie" "${query}"`,
+                    `filetype:avi "Hindi Dubbed Movie" "${query}"`,
+                    `inurl:dead "Hindi Dubbed Movie" "${query}"`
+                ];
+
+                var searchUrl = "https://www.google.com/search?q=" + encodeURIComponent(searchQueries.join(' OR '));
+                window.open(searchUrl, "_blank");
+                alert("Search Success!");
+                window.location.href = "http://swatiai.likesyou.org/";
+            } else {
+                alert("Please enter something to search.");
+            }
+        }
+
+        function buyMeACoffee() {
+            window.open('http://swatiai.likesyou.org/', '_blank'); 
+            alert("Thank you for considering to support!");
+        }
+    </script>
+</body>
+</html>
