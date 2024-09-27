@@ -1,6 +1,6 @@
 # Multi-Site Film Search Engine (Using Google Dorks)
 
-![Project Logo](logo.jpg)  
+![Project Logo](finallogo.jpg)  
 
 ## Project Purpose
 This search engine helps users find movies across various websites, saving time and providing more accurate results.
