@@ -57,7 +57,7 @@ A modern, hacker-inspired movie search engine that leverages **Google Dorks** to
 ## 🤝 Support & Contribution
 
 - Open issues or contribute via [GitHub Issues/PRs](https://github.com/Khilesh114/MULTI_SITE_FILMS_SEARCH_INGINE/).
-- For troubleshooting or suggestions, see our [Support Page](https://your-support-link-here) or email: support@example.com
+- For troubleshooting or suggestions, see our [Support Page](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/) or email: khilesh11414@gmail.com
 - If you appreciate the project: [☕️ Buy Me a Coffee](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/)
 
 ---
