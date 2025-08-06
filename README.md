@@ -1,71 +1,81 @@
 # Multi-Site Film Search Engine
 
-A modern, hacker-inspired movie search engine that leverages **Google Dorks** to help you discover films from multiple sources instantly and efficiently.
+A modern, hacker-inspired cross-site movie search engine that leverages **Google Dorks** and other powerful web techniques to help you find films across multiple sources—fast, safe, and smart.
 
 ---
 
 ## 🚀 Features
 
 - **Unified Multi-Site Search:**  
-  Instantly query dozens of film sites with a single search, no manual site-by-site browsing.
+  Instantly search dozens of movie sites at once, with checkboxes so you can pick exactly which sources to include.
 - **Google Dorks Integration:**  
-  Uses advanced search operators for smart, precise, hard-to-find results.
-- **Fast & Responsive UI:**  
-  Hacker-style neon theme, mobile-friendly, lightning-fast operation.
-- **Search History & Suggestions:**  
-  Auto-saves your searches locally (unlimited), and offers them as instant suggestions while you type.
-- **Theme Toggle:**  
-  Switch between neon-dark and day mode.
-- **Matrix Animation:**  
-  Enjoy cyber-like matrix effects in background and history panel.
-- **Download History:**  
-  Save your search history anytime as a .txt file.
+  Powerful "dork" search operators make it easy to find hard-to-locate content.
+- **Flexible Modes:**  
+  Multiple search levels (Low Level, High Level, Advanced, Deep Hacker) all use only the websites you select.
 - **Multi-Engine Support:**  
-  Supports Google, Bing, and DuckDuckGo, SafeSearch toggle included.
+  Works with Google, Bing, and DuckDuckGo. SafeSearch toggle included.
+- **Fast, Responsive UI:**  
+  Neon hacker theme, mobile-friendly, with animated "matrix" effects for cyber vibes.
+- **Unlimited Search History:**  
+  All your searches (unlimited) are stored only in your browser for privacy, with autocompletion and download options.
+- **Theme Toggle:**  
+  Easily switch between neon-dark and day-light themes.
+- **Persistent Site Selection:**  
+  Your chosen websites are always remembered (saved in your browser).
+- **Absolutely Private:**  
+  No data is sent anywhere—site choices and history are always local to your device.
 
 ---
 
 ## 🖥️ Live Demo
 
-**Try it here:**  
-[https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/)
+Try it live:  
+[🔗 Multi-Site Film Search Engine Demo](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/)
 
 ---
 
 ## 📝 How To Use
 
-1. **Open the website** above.
-2. Enter the movie or actor name in the search bar. Your previous search history will appear as suggestions.
-3. Select your preferred search engine and toggle Safe Search as needed.
-4. Pick a search mode (Low Level, High Level, Advanced, or Deep Hacker Search).
-5. Browse results smartly filtered from many movie sites.
-6. View or download your search history, complete with a matrix animation background.
-7. Switch between dark and day modes anytime.
+1. **Open the site** above.
+2. **Enter the movie or artist name.** Suggestions will auto-complete from your past searches.
+3. **Tick the websites** you want to search (your choices will be remembered forever).
+4. Select your **preferred search engine** and enable/disable SafeSearch as you wish.
+5. Choose a **search mode** (Low Level, High Level, Advanced, or Deep Hacker) – all work only with your selected websites.
+6. Results open in a new tab, filtered for your choices.
+7. View and download your search history at any time.
+8. Switch between dark (hacker) and day-light mode using the theme button.
+9. All your choices and history are private and persistent.
 
 ---
 
-## ⚠️ Important Notes
+## ⚠️ Legal & Usage Notice
 
-- **Google Dorks**: These are advanced operators for powerful web searches.  
-  Learn more: [Google Hacking Database](https://www.exploit-db.com/google-hacking-database)
-- Not all dorks work equally on Bing or DuckDuckGo; for best results, use Google mode.
-- All data is stored **locally in your browser** for privacy. Nothing is uploaded.
-- **Ethical Use Only:** This project is intended for lawful, educational, and research purposes. Don’t misuse for piracy or illegal content.
+- Uses search engine "dorks" (advanced public search operators) to find publicly indexed movie content.
+- Effectiveness depends on search engine/dork and current site listings.  
+  **Google mode usually gives optimal results.**
+- All data (your history and site selections) is only in your browser—never sent to any server.
+- **For educational/research use only.**  
+  Do not use this tool to infringe copyright or access illegal/pirated content. Use ethically and lawfully.
 
 ---
 
-## 🤝 Support & Contribution
+## 🛠️ Development & Contribution
 
-- Open issues or contribute via [GitHub Issues/PRs](https://github.com/Khilesh114/MULTI_SITE_FILMS_SEARCH_INGINE/).
-- For troubleshooting or suggestions, see our [Support Page](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/) or email: khilesh11414@gmail.com
-- If you appreciate the project: [☕️ Buy Me a Coffee](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/)
+- **Source:** [GitHub Repository](https://github.com/Khilesh114/MULTI_SITE_FILMS_SEARCH_INGINE/)
+- **Bugs, Issues, Suggestions:**  
+  [GitHub Issues](https://github.com/Khilesh114/MULTI_SITE_FILMS_SEARCH_INGINE/issues)
+- **Feedback or Contact:**  
+  - [Support Page](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/)
+  - Email: khilesh11414@gmail.com
+- **Donate/Support:**  
+  [☕️ Buy Me a Coffee](https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/)
 
 ---
 
 ## 📜 License
 
-MIT License (see `LICENSE` file for details).
+MIT License – see [`LICENSE`](LICENSE) for details.
 
 ---
 
-**Happy Searching!**
+**Happy Searching! Stay Ethical.**
