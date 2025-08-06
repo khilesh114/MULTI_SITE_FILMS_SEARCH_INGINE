@@ -6,74 +6,317 @@
 <title>MULTI SITE FILMS HACKER ENGINE</title>
 <meta name="theme-color" content="#121212" />
 <style>
-:root { --green: #00ff90; --neon: #00ffe7; --back: #111418; --high: #15ff80; --white: #fff;}
-body {
-  font-family: 'Fira Mono', 'Roboto Mono', monospace;
-  background: linear-gradient(120deg, #111418 0%, #191621 100%);
-  color: var(--green); min-height: 100vh; margin: 0;
-  display: flex; align-items: center; justify-content: center; position: relative;}
-#main-panel {
-  box-shadow: 0 0 30px 10px #011a0e80;
-  padding: 38px 25px 28px 25px; border-radius: 18px;
-  background: rgba(10,16,14,0.96); z-index: 1;
-  position: relative; min-width: 310px; width: 96vw; max-width: 460px;
-}
-#warningMessage {
-  color: #ff5555; background: #33000088; border: 2px solid #ff5555;
-  padding: 10px; border-radius: 7px; margin-bottom: 20px; text-align: center; font-weight: bold;
-}
-h1 { text-align: center; text-transform: uppercase; font-size: 2.1em; letter-spacing: 3px;
-  text-shadow: 0 0 14px var(--high), 0 0 45px var(--neon); margin-bottom: 24px;}
-.input-group { text-align: center; margin-bottom: 17px; position: relative; z-index: 7; }
-input[type="text"] {
-  width: 95%; border: 2px solid var(--high); border-radius: 5px; background: #0d1818; color: var(--green);
-  padding: 13px 13px; font-size: 1.08em; box-shadow: 0 0 7px #00ff9082;
-  outline: none; margin-bottom: 11px; position: relative; z-index: 5;}
-input[type="text"]:focus { border-color: var(--neon);}
-.suggestions { position: absolute; left: 2.5%; top: 54px; width: 95%; background: #121b21; border: 1.2px solid #0df6;
-  border-top: none; border-radius: 0 0 6px 6px; max-height: 170px; overflow-y: auto; z-index: 9;
-  box-shadow: 0 4px 22px #00ffb810; display: none;}
-.suggestions .sugg { padding: 8px 13px; cursor: pointer; color: #0ae288; font-size: 1em;
-  background: none; border: none; text-align: left; width: 100%; outline: none;
-  transition: background 0.14s, color 0.14s;}
-.suggestions .sugg:hover, .suggestions .sugg.active { background: #122d28; color: #33ffe6; }
-.button-group { display: flex; flex-direction: column; gap: 9px; width: 100%; }
-button, select {
-  background: linear-gradient(90deg, #0d212b 50%, #113820 100%);
-  color: var(--green); border: 2px solid var(--neon); border-radius: 7px; font-size: 1em;
-  padding: 10px 7px; cursor: pointer; box-shadow: 0 0 7px #00ffbc40; font-family: inherit; transition: 0.19s; width: 100%;}
-button:hover, button:focus { background: #181847; border-color: var(--high); color: var(--high); box-shadow: 0 0 15px var(--neon); z-index: 1;}
-.theme-toggle {
-  position: absolute; top: 17px; right: 22px; background: none;
-  border: 2px solid var(--neon); color: var(--green); padding: 6px 16px; border-radius: 16px;
-  box-shadow: 0 0 7px #00ffe769; cursor: pointer; transition:.2s; z-index:2; font-size: 1.25em; line-height: 1;
-}
-select, .extras { margin-top: 8px; color: var(--green); user-select: none; }
-.extras { display: flex; justify-content: space-between; align-items: center; gap: 7px; font-size: 0.9em; }
-.extras label { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 4px; }
-#siteCheckboxes { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 6px; max-height: 130px; overflow-y: auto; color: var(--green); font-size: 0.9em;}
-#siteCheckboxes label { cursor: pointer; user-select: none;}
-.history-matrix-container { position: relative; width: 100%; min-height: 45px; margin-top: 15px;}
-#historyMatrixBg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.56; pointer-events: none; border-radius: 7px; }
-#historyList { position: relative; font-size: 1em; color: #6dfff4; border-radius: 7px; padding: 10px 9px 10px 11px; min-height: 23px; z-index: 1; background: rgba(8, 21, 28, 0.29); border: 1.2px solid #24d3b8; word-break: break-word; transition: background 0.4s; margin-bottom: 3px;}
-#historyList span { cursor: pointer; user-select: none; }
-#historyList span:focus { outline: 2px solid var(--neon); outline-offset: 2px; }
-#downloadBtn { float: right; padding: 7px 14px; width: unset; background: linear-gradient(90deg, #193, #2af196); color: #222; font-size: 0.99em; border: 2px solid #48fdda; border-radius: 8px; box-shadow: 0 0 11px #12fd99a8; font-family: inherit; cursor: pointer; transition: 0.18s; margin-bottom: 2px; }
-#downloadBtn:hover, #downloadBtn:focus { background: #16d1d3; color: #033; outline: none;}
-.clearfix::after { content: ''; clear: both; display: table; }
-.background-matrix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden;}
-::-webkit-scrollbar { width: 0px;}
-select { background-color: #0d1818; color: var(--green); border-color: var(--neon);}
-select option { background-color: #111418; color: var(--green);}
-body.day-mode select { background-color: #ddf7de; color: #024d23; border-color: #07b957;}
-body.day-mode select option { background-color: #ddf7de; color: #024d23; }
-body.day-mode { background: linear-gradient(120deg, #ddeeff 0%, #c1d2e8 100%); color: #0a3f2c;}
-body.day-mode #main-panel { background: rgba(220, 230, 225, 0.9); box-shadow: 0 0 30px 10px #a3dca080; color: #054928;}
-body.day-mode input[type="text"], body.day-mode button, body.day-mode select, body.day-mode .suggestions { color: #024d23; border-color: #07b957; background: #ddf7de; box-shadow: 0 0 7px #07c15570; }
-body.day-mode .suggestions .sugg, body.day-mode #historyList { background: #a4e79b; color: #023910; border-color: #05ab4d; }
-body.day-mode .suggestions .sugg:hover, body.day-mode .suggestions .sugg.active { background: #089540; color: #d4f9d8;}
-body.day-mode .theme-toggle { border-color: #07c155; color: #07c155; box-shadow: 0 0 7px #07c155;}
-body.day-mode button:hover, body.day-mode button:focus { background: #0a6d2a; border-color: #07c155; color: #d4f9d8; box-shadow: 0 0 15px #07c155;}
+  :root {
+    --green: #00ff90; --neon: #00ffe7; --back: #111418; --high: #15ff80; --white: #fff;
+  }
+  body {
+    font-family: 'Fira Mono', 'Roboto Mono', monospace;
+    background: linear-gradient(120deg, #111418 0%, #191621 100%);
+    color: var(--green);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  #main-panel {
+    box-shadow: 0 0 30px 10px #011a0e80;
+    padding: 38px 25px 28px 25px;
+    border-radius: 18px;
+    background: rgba(10,16,14,0.96);
+    z-index: 1;
+    position: relative;
+    min-width: 310px;
+    width: 96vw;
+    max-width: 460px;
+  }
+  #warningMessage {
+    color: #ff5555;
+    background: #33000088;
+    border: 2px solid #ff5555;
+    padding: 10px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2.1em;
+    letter-spacing: 3px;
+    text-shadow: 0 0 14px var(--high), 0 0 45px var(--neon);
+    margin-bottom: 24px;
+  }
+  .input-group {
+    text-align: center;
+    margin-bottom: 17px;
+    position: relative;
+    z-index: 7;
+  }
+  input[type="text"] {
+    width: 95%;
+    border: 2px solid var(--high);
+    border-radius: 5px;
+    background: #0d1818;
+    color: var(--green);
+    padding: 13px 13px;
+    font-size: 1.08em;
+    box-shadow: 0 0 7px #00ff9082;
+    outline: none;
+    margin-bottom: 11px;
+    position: relative;
+    z-index: 5;
+  }
+  input[type="text"]:focus { border-color: var(--neon); }
+  .suggestions {
+    position: absolute;
+    left: 2.5%;
+    top: 54px;
+    width: 95%;
+    background: #121b21;
+    border: 1.2px solid #0df6;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 170px;
+    overflow-y: auto;
+    z-index: 9;
+    box-shadow: 0 4px 22px #00ffb810;
+    display: none;
+  }
+  .suggestions .sugg {
+    padding: 8px 13px;
+    cursor: pointer;
+    color: #0ae288;
+    font-size: 1em;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    transition: background 0.14s, color 0.14s;
+  }
+  .suggestions .sugg:hover,
+  .suggestions .sugg.active {
+    background: #122d28;
+    color: #33ffe6;
+  }
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+  }
+  button,
+  select {
+    background: linear-gradient(90deg, #0d212b 50%, #113820 100%);
+    color: var(--green);
+    border: 2px solid var(--neon);
+    border-radius: 7px;
+    font-size: 1em;
+    padding: 10px 7px;
+    cursor: pointer;
+    box-shadow: 0 0 7px #00ffbc40;
+    font-family: inherit;
+    transition: 0.19s;
+    width: 100%;
+  }
+  button:hover,
+  button:focus {
+    background: #181847;
+    border-color: var(--high);
+    color: var(--high);
+    box-shadow: 0 0 15px var(--neon);
+    z-index: 1;
+  }
+  .theme-toggle {
+    position: absolute;
+    top: 17px;
+    right: 22px;
+    background: none;
+    border: 2px solid var(--neon);
+    color: var(--green);
+    padding: 6px 16px;
+    border-radius: 16px;
+    box-shadow: 0 0 7px #00ffe769;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 2;
+    font-size: 1.25em;
+    line-height: 1;
+  }
+  select,
+  .extras {
+    margin-top: 8px;
+    color: var(--green);
+    user-select: none;
+  }
+  .extras {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.9em;
+  }
+  .extras label {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  #siteCheckboxes {
+    margin-top: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-height: 130px;
+    overflow-y: auto;
+    color: var(--green);
+    font-size: 0.9em;
+  }
+  #siteCheckboxes label {
+    cursor: pointer;
+    user-select: none;
+  }
+  .history-matrix-container {
+    position: relative;
+    width: 100%;
+    min-height: 45px;
+    margin-top: 15px;
+  }
+  #historyMatrixBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.56;
+    pointer-events: none;
+    border-radius: 7px;
+  }
+  #historyList {
+    position: relative;
+    font-size: 1em;
+    color: #6dfff4;
+    border-radius: 7px;
+    padding: 10px 9px 10px 11px;
+    min-height: 23px;
+    z-index: 1;
+    background: rgba(8, 21, 28, 0.29);
+    border: 1.2px solid #24d3b8;
+    word-break: break-word;
+    transition: background 0.4s;
+    margin-bottom: 3px;
+  }
+  #historyList span {
+    cursor: pointer;
+    user-select: none;
+  }
+  #historyList span:focus {
+    outline: 2px solid var(--neon);
+    outline-offset: 2px;
+  }
+  #downloadBtn {
+    float: right;
+    padding: 7px 14px;
+    width: unset;
+    background: linear-gradient(90deg, #193, #2af196);
+    color: #222;
+    font-size: 0.99em;
+    border: 2px solid #48fdda;
+    border-radius: 8px;
+    box-shadow: 0 0 11px #12fd99a8;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.18s;
+    margin-bottom: 2px;
+  }
+  #downloadBtn:hover,
+  #downloadBtn:focus {
+    background: #16d1d3;
+    color: #033;
+    outline: none;
+  }
+  .clearfix::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+  .background-matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  select {
+    background-color: #0d1818;
+    color: var(--green);
+    border-color: var(--neon);
+  }
+  select option {
+    background-color: #111418;
+    color: var(--green);
+  }
+  body.day-mode select {
+    background-color: #ddf7de;
+    color: #024d23;
+    border-color: #07b957;
+  }
+  body.day-mode select option {
+    background-color: #ddf7de;
+    color: #024d23;
+  }
+  body.day-mode {
+    background: linear-gradient(120deg, #ddeeff 0%, #c1d2e8 100%);
+    color: #0a3f2c;
+  }
+  body.day-mode #main-panel {
+    background: rgba(220, 230, 225, 0.9);
+    box-shadow: 0 0 30px 10px #a3dca080;
+    color: #054928;
+  }
+  body.day-mode input[type="text"],
+  body.day-mode button,
+  body.day-mode select,
+  body.day-mode .suggestions {
+    color: #024d23;
+    border-color: #07b957;
+    background: #ddf7de;
+    box-shadow: 0 0 7px #07c15570;
+  }
+  body.day-mode .suggestions .sugg,
+  body.day-mode #historyList {
+    background: #a4e79b;
+    color: #023910;
+    border-color: #05ab4d;
+  }
+  body.day-mode .suggestions .sugg:hover,
+  body.day-mode .suggestions .sugg.active {
+    background: #089540;
+    color: #d4f9d8;
+  }
+  body.day-mode .theme-toggle {
+    border-color: #07c155;
+    color: #07c155;
+    box-shadow: 0 0 7px #07c155;
+  }
+  body.day-mode button:hover,
+  body.day-mode button:focus {
+    background: #0a6d2a;
+    border-color: #07c155;
+    color: #d4f9d8;
+    box-shadow: 0 0 15px #07c155;
+  }
 </style>
 </head>
 <body>
@@ -81,7 +324,7 @@ body.day-mode button:hover, body.day-mode button:focus { background: #0a6d2a; bo
 <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle light/dark mode" aria-pressed="false">🌙</button>
 <div id="main-panel" role="main">
   <div id="warningMessage">
-    ⚠️ Warning: This search engine may lead to third-party sites that host copyrighted or illegal content.
+    ⚠️ Warning: This search engine may lead to third-party sites that host copyrighted or illegal content.<br>
     Use it responsibly and at your own risk. Do not use for piracy or unlawful activity.
   </div>
   <h1>MULTI SITE FILMS<br>HACKER SEARCH ENGINE</h1>
@@ -122,177 +365,312 @@ body.day-mode button:hover, body.day-mode button:focus { background: #0a6d2a; bo
   </div>
 </div>
 <script>
-const allSites=[
-  "filmyzilla.com","filmyzilla.xyz","filmyzilla.net","filmyhit.casino","couchtuner.one","1filmyfly.xyz","mydownloadtube.org","hollymoviehd.cc","m4ufree.ws","bmovies.is","movies4u.li","yts.mx","bolly4u.rodeo","bollyflix.beer","bolly4u.shop","downloadhub.contact","9xmovies.com.vu","mkvcinemas.cat","moviemad.co.com","mp4moviez.glass","worldfree4u.helpsarkari.com","filmyfly.wales","thekhatrimaza.lol","2filmywap.com"
-];
-// Checkbox rendering & localStorage sync
-function renderSiteCheckboxes() {
-  const sel = JSON.parse(localStorage.getItem("selectedSites")||"[]");
-  const boxDiv = document.getElementById("siteCheckboxes");
-  boxDiv.innerHTML = allSites.map(site => {
-    const c = (sel.length ? sel.includes(site) : true);
-    return `<label><input type="checkbox" class="siteCheck" value="${site}" ${c?"checked":""}/> ${site}</label>`;
-  }).join('');
-  document.querySelectorAll(".siteCheck").forEach(cb=>cb.addEventListener('change',saveSelectedSites));
-}
-function saveSelectedSites() {
-  const selected = Array.from(document.querySelectorAll('.siteCheck:checked')).map(cb => cb.value);
-  localStorage.setItem("selectedSites", JSON.stringify(selected));
-}
-function getWildcardSites() {
-  const sel = JSON.parse(localStorage.getItem("selectedSites")||"[]");
-  const uniqueDomains = new Set();
-  sel.forEach(domain => {
-    let match = domain.toLowerCase().match(/^(?:[\w-]+\.)?([\w-]+)\./);
-    if (match && match[1]) uniqueDomains.add(match[1]);
-    else uniqueDomains.add(domain);
-  });
-  return Array.from(uniqueDomains).map(d => `site:*.${d}.*`);
-}
-function searchWithSelectedSites(queryModifier = null) {
-  const q = searchInput.value.trim();
-  if (!q) { alert("Type movie or artist name!"); return; }
-  const wildcardSites = getWildcardSites();
-  if (wildcardSites.length === 0) { alert("Select at least one website!"); return; }
-  const siteFilter = wildcardSites.join(' OR ');
-  let query = `(${siteFilter}) ${q}`;
-  if (typeof queryModifier === "function") {
-    query = queryModifier(q, wildcardSites);
+  const allSites = [
+    "filmyzilla.com","filmyzilla.xyz","filmyzilla.net",
+    "filmyhit.casino","couchtuner.one",
+    "1filmyfly.xyz","mydownloadtube.org",
+    "hollymoviehd.cc","m4ufree.ws","bmovies.is",
+    "movies4u.li","yts.mx","bolly4u.rodeo","bollyflix.beer",
+    "bolly4u.shop","downloadhub.contact","9xmovies.com.vu",
+    "mkvcinemas.cat","moviemad.co.com","mp4moviez.glass",
+    "worldfree4u.helpsarkari.com","filmyfly.wales","thekhatrimaza.lol",
+    "2filmywap.com"
+  ];
+
+  function renderSiteCheckboxes() {
+    const selectedSites = JSON.parse(localStorage.getItem("selectedSites") || "[]");
+    const container = document.getElementById("siteCheckboxes");
+    container.innerHTML = allSites.map(site => {
+      const checked = selectedSites.length ? selectedSites.includes(site) : true;
+      return `<label><input type="checkbox" class="siteCheck" value="${site}" ${checked ? "checked" : ""} /> ${site}</label>`;
+    }).join('');
+    document.querySelectorAll(".siteCheck").forEach(cb => cb.addEventListener('change', saveSelectedSites));
   }
-  const engine = document.getElementById("engineSel").value;
-  const safe = document.getElementById("safeSearch").checked;
-  addToHistory(q);
-  window.open(getEngineUrl(engine, query, safe), "_blank");
-}
-// All "level" functions now just call the core one:
-function searchOnSite1() { searchWithSelectedSites(); }
-function searchOnSite2() { searchWithSelectedSites(); }
-function searchOnSite3() { searchWithSelectedSites(); }
-function customSearch() {
-  searchWithSelectedSites((q, sites) => {
-    return `(${sites.join(' OR ')}) intitle:"Hindi Dubbed Movie" "${q}" OR filetype:mp4 "Hindi Dubbed Movie" "${q}" OR inurl:watch "Hindi Dubbed Movie" "${q}" OR inurl:stream "Hindi Dubbed Movie" "${q}" OR filetype:torrent "Hindi Dubbed Movie" "${q}" OR filetype:avi "Hindi Dubbed Movie" "${q}"`.replace(/\s+/g, ' ').trim();
-  });
-}
-function getEngineUrl(engine, query, safe) {
-  if (engine === "google") return "https://www.google.com/search?q=" + encodeURIComponent(query) + (safe ? "&safe=active" : "");
-  else if (engine === "bing") return "https://www.bing.com/search?q=" + encodeURIComponent(query) + (safe ? "&adlt=strict" : "&adlt=off");
-  else if (engine === "duckduckgo") return "https://duckduckgo.com/?q=" + encodeURIComponent(query) + (safe ? "&kp=1" : "&kp=-2");
-  return "";
-}
-function buyMeACoffee() { window.open('https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/', '_blank'); }
-// Matrix animation code (same as before)
-const c=document.getElementById("matrixbg"),ctx=c.getContext("2d");
-function resizeMatrix(){ c.width=window.innerWidth; c.height=window.innerHeight; }
-resizeMatrix(); window.addEventListener("resize", resizeMatrix);
-const chars = "アカサタナハマヤラワガザダバパイキシチニヒミリギジヂビピウクスツヌフムユルグズヅブプエケセテネヘメレゲゼデベペオコソトノホモヨロゴゾドボポヴンabcdefghijklmnopqrstuvwxyz".split("");
-let fontSize=14, columns, drops;
-function matrixInit(){ columns = Math.floor(window.innerWidth / fontSize); drops = Array(columns).fill(1);}
-matrixInit(); window.addEventListener("resize", matrixInit);
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0,0,0,0.09)";
-  ctx.fillRect(0, 0, c.width, c.height);
-  ctx.font = fontSize + "px 'Fira Mono', monospace";
-  for (let i = 0; i < drops.length; i++) {
-    const text = chars[Math.floor(Math.random() * chars.length)];
-    ctx.fillStyle = "hsl(" + (100 + Math.random() * 70) + ",97%,62%)";
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > c.height && Math.random() > 0.963) drops[i] = 0;
-    drops[i]++;
+
+  function saveSelectedSites() {
+    const selected = Array.from(document.querySelectorAll('.siteCheck:checked')).map(cb => cb.value);
+    localStorage.setItem("selectedSites", JSON.stringify(selected));
   }
-}
-setInterval(drawMatrix, 32);
-// History matrix
-const hc=document.getElementById("historyMatrixBg"),hctx=hc.getContext("2d");
-function resizeHistoryMatrix(){ let el=document.querySelector('.history-matrix-container'); hc.width=el.offsetWidth; hc.height=el.offsetHeight;}
-function hmatrixInit(){ window.historyCols=Math.floor(hc.width/11); window.historyDrops=Array(window.historyCols).fill(1);}
-window.addEventListener("resize",()=>{resizeHistoryMatrix();hmatrixInit();});
-setTimeout(()=>{resizeHistoryMatrix();hmatrixInit();},120);
-function drawHistoryMatrix(){ hctx.clearRect(0,0,hc.width,hc.height); hctx.font="11px 'Fira Mono', monospace"; for(let i=0;i<window.historyCols;i++){ const text=chars[Math.floor(Math.random()*chars.length)]; hctx.fillStyle="hsl("+(110+Math.random()*40)+",97%,52%)"; hctx.fillText(text,i*11,window.historyDrops[i]*11); if(window.historyDrops[i]*11>hc.height&&Math.random()>0.97) window.historyDrops[i]=0; window.historyDrops[i]++; } }
-setInterval(drawHistoryMatrix,56); hmatrixInit(); setTimeout(()=>{resizeHistoryMatrix();hmatrixInit();},420);
-// Suggestions, history/autocomplete etc:
-const searchInput = document.getElementById("searchInput");
-const suggBox = document.getElementById("suggestions");
-let currSuggIdx = -1;
-function showSuggestions(){
-  const val = searchInput.value.trim().toLowerCase();
-  let hist = JSON.parse(localStorage.getItem("filmHackHist")||"[]");
-  if(val.length<1) { suggBox.style.display="none"; currSuggIdx=-1; return; }
-  let matches = hist.filter(q => q.toLowerCase().includes(val));
-  if(matches.length===0){ suggBox.style.display="none"; currSuggIdx=-1; return; }
-  suggBox.innerHTML = matches.map((h,i) =>
-    `<button class="sugg" type="button" tabindex="0" data-sidx="${i}" role="option">${h.replace(new RegExp(val,"ig"), (m) => "<mark style='color:#18ffee;background:transparent;'>" + m + "</mark>")}</button>`
-  ).join('');
-  suggBox.style.display = 'block'; currSuggIdx = -1;
-}
-suggBox.addEventListener('mousedown', e => {
-  let t = e.target.closest('.sugg');
-  if (!t) return;
-  searchInput.value = t.innerText; suggBox.style.display = 'none'; searchInput.focus();
-});
-searchInput.addEventListener("input", showSuggestions);
-searchInput.addEventListener("focus", showSuggestions);
-searchInput.addEventListener("blur", () => { setTimeout(() => { suggBox.style.display = 'none'; }, 120); });
-searchInput.addEventListener("keydown", e => {
-  if (suggBox.style.display !== "block") return;
-  let items = Array.from(suggBox.children);
-  if (e.key === "ArrowDown") {
-    currSuggIdx = (currSuggIdx + 1) % items.length;
-    items.forEach(b => b.classList.remove("active"));
-    items[currSuggIdx].classList.add("active");
-    e.preventDefault();
-  } else if (e.key === "ArrowUp") {
-    currSuggIdx = (currSuggIdx - 1 + items.length) % items.length;
-    items.forEach(b => b.classList.remove("active"));
-    items[currSuggIdx].classList.add("active");
-    e.preventDefault();
-  } else if (e.key === "Enter" || e.key === "Tab") {
-    if (currSuggIdx > -1 && items[currSuggIdx]) {
-      searchInput.value = stripHtml(items[currSuggIdx].innerHTML);
-      suggBox.style.display = 'none';
-      setTimeout(() => searchInput.focus(), 90);
-      e.preventDefault();
+
+  // Convert selected exact domains to wildcard site filters for subdomains + TLDs
+  function getWildcardSites() {
+    const selected = JSON.parse(localStorage.getItem("selectedSites") || "[]");
+    const uniqueMainDomains = new Set();
+    selected.forEach(domain => {
+      const match = domain.toLowerCase().match(/^(?:[\w-]+\.)?([\w-]+)\./);
+      if (match && match[1]) uniqueMainDomains.add(match[1]);
+      else uniqueMainDomains.add(domain);
+    });
+    return Array.from(uniqueMainDomains).map(d => `site:*.${d}.*`);
+  }
+
+  function searchWithSelectedSites(queryModifier = null) {
+    const q = searchInput.value.trim();
+    if (!q) {
+      alert("Type movie or artist name!");
+      return;
+    }
+    const wildcardSites = getWildcardSites();
+    if (wildcardSites.length === 0) {
+      alert("Select at least one website!");
+      return;
+    }
+    let query = `(${wildcardSites.join(" OR ")}) ${q}`;
+    if (typeof queryModifier === "function") {
+      query = queryModifier(q, wildcardSites);
+    }
+    const engine = document.getElementById("engineSel").value;
+    const safe = document.getElementById("safeSearch").checked;
+    addToHistory(q);
+    window.open(getEngineUrl(engine, query, safe), "_blank");
+  }
+
+  function searchOnSite1() { searchWithSelectedSites(); }
+  function searchOnSite2() { searchWithSelectedSites(); }
+  function searchOnSite3() { searchWithSelectedSites(); }
+  function customSearch() {
+    searchWithSelectedSites((q, sites) => {
+      const orSites = sites.join(" OR ");
+      return `(${orSites}) intitle:"Hindi Dubbed Movie" "${q}" OR filetype:mp4 "Hindi Dubbed Movie" "${q}" OR inurl:watch "Hindi Dubbed Movie" "${q}" OR inurl:stream "Hindi Dubbed Movie" "${q}" OR filetype:torrent "Hindi Dubbed Movie" "${q}" OR filetype:avi "Hindi Dubbed Movie" "${q}"`.replace(/\s+/g, " ").trim();
+    });
+  }
+
+  function getEngineUrl(engine, query, safe) {
+    if (engine === "google")
+      return "https://www.google.com/search?q=" + encodeURIComponent(query) + (safe ? "&safe=active" : "");
+    else if (engine === "bing")
+      return "https://www.bing.com/search?q=" + encodeURIComponent(query) + (safe ? "&adlt=strict" : "&adlt=off");
+    else if (engine === "duckduckgo")
+      return "https://duckduckgo.com/?q=" + encodeURIComponent(query) + (safe ? "&kp=1" : "&kp=-2");
+    return "";
+  }
+
+  function buyMeACoffee() {
+    window.open("https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/", "_blank");
+  }
+
+  // Matrix Animation code
+  const c = document.getElementById("matrixbg"),
+    ctx = c.getContext("2d");
+  function resizeMatrix() {
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+  }
+  resizeMatrix();
+  window.addEventListener("resize", resizeMatrix);
+  const chars = "アカサタナハマヤラワガザダバパイキシチニヒミリギジヂビピウクスヌフムユルグズヅブプエケセテネヘメレゲゼデベペオコソトノホモヨロゴゾドボポヴンabcdefghijklmnopqrstuvwxyz".split("");
+  const fontSize = 14;
+  let columns, drops;
+  function matrixInit() {
+    columns = Math.floor(window.innerWidth / fontSize);
+    drops = Array(columns).fill(1);
+  }
+  matrixInit();
+  window.addEventListener("resize", matrixInit);
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0,0,0,0.09)";
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.font = fontSize + "px 'Fira Mono', monospace";
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillStyle = "hsl(" + (100 + Math.random() * 70) + ",97%,62%)";
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > c.height && Math.random() > 0.963)
+        drops[i] = 0;
+      drops[i]++;
     }
   }
-});
-function stripHtml(h){ let tmp=document.createElement("div"); tmp.innerHTML=h; return tmp.textContent || tmp.innerText || ""; }
-function addToHistory(txt){ if(!txt.trim()) return; let hist=JSON.parse(localStorage.getItem("filmHackHist")||"[]"); if(hist[0]!==txt) hist.unshift(txt); hist = Array.from(new Set(hist)); localStorage.setItem("filmHackHist", JSON.stringify(hist)); renderHistory(); }
-function renderHistory() {
-  let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
-  const historyList = document.getElementById("historyList");
-  historyList.innerHTML = hist.length ? ("Recent: " + hist.slice(0, 5).map(h =>
-    `<span tabindex="0" onclick="setQ('${h.replace(/'/g,"&#39;")}')" onkeydown="if(event.key==='Enter'){setQ('${h.replace(/'/g,"&#39;")}')}" role="button" aria-label="Repeat search: ${h}">${h}</span>`
-  ).join(", ")) : "";
-  setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 40);
-}
-function setQ(q) { searchInput.value = q; suggBox.style.display = 'none'; searchInput.focus(); }
-function downloadHistory(){
-  let hist = JSON.parse(localStorage.getItem("filmHackHist")||"[]");
-  if(!hist.length){ alert('No search history!'); return; }
-  let txt = hist.map((h,i) => `${i + 1}. ${h}`).join('\n');
-  let blob = new Blob([txt], { type: 'text/plain' });
-  let a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'search_history.txt';
-  document.body.appendChild(a); a.click();
-  setTimeout(() => { document.body.removeChild(a); }, 200);
-}
-const themeBtn = document.getElementById("themeToggleBtn");
-themeBtn.onclick = () => {
-  document.body.classList.toggle("day-mode");
-  if(document.body.classList.contains("day-mode")) {
-    themeBtn.innerText = "🌞";
-    themeBtn.setAttribute("aria-pressed", "true");
-  } else {
-    themeBtn.innerText = "🌙";
-    themeBtn.setAttribute("aria-pressed", "false");
+  setInterval(drawMatrix, 32);
+
+  // Mini Matrix etc for history
+  const hc = document.getElementById("historyMatrixBg"),
+    hctx = hc.getContext("2d");
+  function resizeHistoryMatrix() {
+    var el = document.querySelector(".history-matrix-container");
+    hc.width = el.offsetWidth;
+    hc.height = el.offsetHeight;
   }
-};
-searchInput.addEventListener("keydown", function (e) {
-  if (e.key === "Enter" && (!suggBox.style.display || suggBox.style.display === "none")) {
-    searchOnSite1();
+  function hmatrixInit() {
+    window.historyCols = Math.floor(hc.width / 11);
+    window.historyDrops = Array(window.historyCols).fill(1);
   }
-});
-window.onload = () => { renderHistory(); renderSiteCheckboxes(); };
+  window.addEventListener("resize", () => {
+    resizeHistoryMatrix();
+    hmatrixInit();
+  });
+  setTimeout(() => {
+    resizeHistoryMatrix();
+    hmatrixInit();
+  }, 120);
+  function drawHistoryMatrix() {
+    hctx.clearRect(0, 0, hc.width, hc.height);
+    hctx.font = "11px 'Fira Mono', monospace";
+    for (let i = 0; i < window.historyCols; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      hctx.fillStyle = "hsl(" + (110 + Math.random() * 40) + ",97%,52%)";
+      hctx.fillText(text, i * 11, window.historyDrops[i] * 11);
+      if (window.historyDrops[i] * 11 > hc.height && Math.random() > 0.97)
+        window.historyDrops[i] = 0;
+      window.historyDrops[i]++;
+    }
+  }
+  setInterval(drawHistoryMatrix, 56);
+
+  // Suggestions autocomplete & history
+  const searchInput = document.getElementById("searchInput");
+  const suggBox = document.getElementById("suggestions");
+  let currSuggIdx = -1;
+  function showSuggestions() {
+    const val = searchInput.value.trim().toLowerCase();
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    if (val.length < 1) {
+      suggBox.style.display = "none";
+      currSuggIdx = -1;
+      return;
+    }
+    let matches = hist.filter((q) => q.toLowerCase().includes(val));
+    if (matches.length === 0) {
+      suggBox.style.display = "none";
+      currSuggIdx = -1;
+      return;
+    }
+    suggBox.innerHTML = matches
+      .map(
+        (h, i) => `<button class="sugg" type="button" tabindex="0" data-sidx="${i}" role="option">${h.replace(
+          new RegExp(val, "ig"),
+          (m) =>
+            "<mark style='color:#18ffee;background:transparent;'>" +
+            m +
+            "</mark>"
+        )}</button>`
+      )
+      .join("");
+    suggBox.style.display = "block";
+    currSuggIdx = -1;
+  }
+  suggBox.addEventListener("mousedown", (e) => {
+    let t = e.target.closest(".sugg");
+    if (!t) return;
+    searchInput.value = t.innerText;
+    suggBox.style.display = "none";
+    searchInput.focus();
+  });
+  searchInput.addEventListener("input", showSuggestions);
+  searchInput.addEventListener("focus", showSuggestions);
+  searchInput.addEventListener("blur", () => {
+    setTimeout(() => {
+      suggBox.style.display = "none";
+    }, 120);
+  });
+  searchInput.addEventListener("keydown", (e) => {
+    if (suggBox.style.display !== "block") return;
+    let items = Array.from(suggBox.children);
+    if (e.key === "ArrowDown") {
+      currSuggIdx = (currSuggIdx + 1) % items.length;
+      items.forEach((b) => b.classList.remove("active"));
+      items[currSuggIdx].classList.add("active");
+      e.preventDefault();
+    } else if (e.key === "ArrowUp") {
+      currSuggIdx = (currSuggIdx - 1 + items.length) % items.length;
+      items.forEach((b) => b.classList.remove("active"));
+      items[currSuggIdx].classList.add("active");
+      e.preventDefault();
+    } else if (e.key === "Enter" || e.key === "Tab") {
+      if (currSuggIdx > -1 && items[currSuggIdx]) {
+        searchInput.value = stripHtml(items[currSuggIdx].innerHTML);
+        suggBox.style.display = "none";
+        setTimeout(() => searchInput.focus(), 90);
+        e.preventDefault();
+      }
+    }
+  });
+
+  function stripHtml(h) {
+    let tmp = document.createElement("div");
+    tmp.innerHTML = h;
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  function addToHistory(txt) {
+    if (!txt.trim()) return;
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    if (hist[0] !== txt) hist.unshift(txt);
+    hist = Array.from(new Set(hist));
+    localStorage.setItem("filmHackHist", JSON.stringify(hist));
+    renderHistory();
+  }
+
+  function renderHistory() {
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    const historyList = document.getElementById("historyList");
+    historyList.innerHTML = hist.length
+      ? "Recent: " +
+        hist
+          .slice(0, 5)
+          .map(
+            (h) =>
+              `<span tabindex="0" onclick="setQ('${h.replace(
+                /'/g,
+                "&#39;"
+              )}')" onkeydown="if(event.key==='Enter'){setQ('${h.replace(
+                /'/g,
+                "&#39;"
+              )}')}" role="button" aria-label="Repeat search: ${h}">${h}</span>`
+          )
+          .join(", ")
+      : "";
+    setTimeout(() => {
+      resizeHistoryMatrix();
+      hmatrixInit();
+    }, 40);
+  }
+
+  function setQ(q) {
+    searchInput.value = q;
+    suggBox.style.display = "none";
+    searchInput.focus();
+  }
+
+  function downloadHistory() {
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    if (!hist.length) {
+      alert("No search history!");
+      return;
+    }
+    let txt = hist.map((h, i) => `${i + 1}. ${h}`).join("\n");
+    let blob = new Blob([txt], { type: "text/plain" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "search_history.txt";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+    }, 200);
+  }
+
+  const themeBtn = document.getElementById("themeToggleBtn");
+  themeBtn.onclick = () => {
+    document.body.classList.toggle("day-mode");
+    if (document.body.classList.contains("day-mode")) {
+      themeBtn.innerText = "🌞";
+      themeBtn.setAttribute("aria-pressed", "true");
+    } else {
+      themeBtn.innerText = "🌙";
+      themeBtn.setAttribute("aria-pressed", "false");
+    }
+  };
+
+  searchInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && (!suggBox.style.display || suggBox.style.display === "none")) {
+      searchOnSite1();
+    }
+  });
+
+  window.onload = () => {
+    renderHistory();
+    renderSiteCheckboxes();
+  };
 </script>
 </body>
 </html>
