@@ -6,7 +6,6 @@
 <title>MULTI SITE FILMS HACKER ENGINE</title>
 <meta name="theme-color" content="#121212" />
 <style>
-  /* Root and body styles */
   :root {
     --green: #00ff90; --neon: #00ffe7;
     --back: #111418; --high: #15ff80; --white: #fff;
@@ -32,6 +31,17 @@
     min-width: 310px;
     width: 96vw;
     max-width: 460px;
+  }
+  /* Warning box */
+  #warningMessage {
+    color: #ff5555;
+    background: #33000088;
+    border: 2px solid #ff5555;
+    padding: 10px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
   }
   h1 {
     text-align: center;
@@ -61,9 +71,9 @@
     position: relative;
     z-index: 5;
   }
-  input[type="text"]:focus { border-color: var(--neon); }
-
-  /* Suggestions */
+  input[type="text"]:focus {
+    border-color: var(--neon);
+  }
   .suggestions {
     position: absolute;
     left: 2.5%;
@@ -91,19 +101,19 @@
     outline: none;
     transition: background 0.14s, color 0.14s;
   }
-  .suggestions .sugg:hover, .suggestions .sugg.active {
+  .suggestions .sugg:hover,
+  .suggestions .sugg.active {
     background: #122d28;
     color: #33ffe6;
   }
-
-  /* Buttons & selects */
   .button-group {
     display: flex;
     flex-direction: column;
     gap: 9px;
     width: 100%;
   }
-  button, select {
+  button,
+  select {
     background: linear-gradient(90deg, #0d212b 50%, #113820 100%);
     color: var(--green);
     border: 2px solid var(--neon);
@@ -116,15 +126,14 @@
     transition: 0.19s;
     width: 100%;
   }
-  button:hover, button:focus {
+  button:hover,
+  button:focus {
     background: #181847;
     border-color: var(--high);
     color: var(--high);
     box-shadow: 0 0 15px var(--neon);
     z-index: 1;
   }
-
-  /* Theme toggle */
   .theme-toggle {
     position: absolute;
     top: 17px;
@@ -141,8 +150,8 @@
     font-size: 1.25em;
     line-height: 1;
   }
-
-  select, .extras {
+  select,
+  .extras {
     margin-top: 8px;
     color: var(--green);
     user-select: none;
@@ -161,8 +170,6 @@
     align-items: center;
     gap: 4px;
   }
-
-  /* Site checkboxes styling */
   #siteCheckboxes {
     margin-top: 7px;
     display: flex;
@@ -177,8 +184,6 @@
     cursor: pointer;
     user-select: none;
   }
-
-  /* History Matrix & panel */
   .history-matrix-container {
     position: relative;
     width: 100%;
@@ -233,7 +238,8 @@
     transition: 0.18s;
     margin-bottom: 2px;
   }
-  #downloadBtn:hover, #downloadBtn:focus {
+  #downloadBtn:hover,
+  #downloadBtn:focus {
     background: #16d1d3;
     color: #033;
     outline: none;
@@ -257,7 +263,7 @@
     width: 0px;
   }
 
-  /* Dark mode select fixes */
+  /* Select styling for dark/light themes */
   select {
     background-color: #0d1818;
     color: var(--green);
@@ -324,9 +330,15 @@
 <body>
 
 <canvas class="background-matrix" id="matrixbg" aria-hidden="true"></canvas>
-<button class="theme-toggle" aria-pressed="false" aria-label="Toggle light/dark mode" id="themeToggleBtn">🌙</button>
+<button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle light/dark mode" aria-pressed="false">🌙</button>
 
 <div id="main-panel" role="main">
+
+  <div id="warningMessage">
+    ⚠️ Warning: This search engine may lead to third-party sites that host copyrighted or illegal content.
+    Use it responsibly and at your own risk. Do not use for piracy or unlawful activity.
+  </div>
+
   <h1>MULTI SITE FILMS<br>HACKER SEARCH ENGINE</h1>
 
   <div style="margin-bottom:12px; color:#18ffd2; font-size:0.9em;">
@@ -337,7 +349,6 @@
   <div class="input-group">
     <input id="searchInput" type="text" placeholder="Type movie or artist name..." aria-label="Movie or Artist Name" autocomplete="off" role="searchbox" spellcheck="false" />
     <div id="suggestions" class="suggestions" role="listbox" aria-label="Search Suggestions"></div>
-
     <div class="extras">
       <label for="engineSel">Engine:</label>
       <select id="engineSel" aria-label="Search Engine">
@@ -369,275 +380,250 @@
   <div style="color:#55ffb9a8; font-size:0.88em; text-align:center; letter-spacing:1px; margin-top:7px; user-select:none;">
     made with <span style="color:#ee00cc">❤</span> by <b>Khilesh</b> • 2024
   </div>
+
 </div>
 
 <script>
-// Site domains list (you can customize/add more exact full domains)
-const allSites = [
-  "filmyzilla.com","filmyzilla.xyz","filmyzilla.net", // example multiple domains variants of filmyzilla
-  "filmyhit.casino","couchtuner.one",
-  "1filmyfly.xyz","mydownloadtube.org",
-  "hollymoviehd.cc","m4ufree.ws","bmovies.is",
-  "movies4u.li","yts.mx","bolly4u.rodeo","bollyflix.beer",
-  "bolly4u.shop","downloadhub.contact","9xmovies.com.vu",
-  "mkvcinemas.cat","moviemad.co.com","mp4moviez.glass",
-  "worldfree4u.helpsarkari.com","filmyfly.wales","thekhatrimaza.lol",
-  "2filmywap.com"
-];
+  // Available sites list - add more if needed
+  const allSites = [
+    "filmyzilla.com","filmyzilla.xyz","filmyzilla.net", 
+    "filmyhit.casino","couchtuner.one",
+    "1filmyfly.xyz","mydownloadtube.org",
+    "hollymoviehd.cc","m4ufree.ws","bmovies.is",
+    "movies4u.li","yts.mx","bolly4u.rodeo","bollyflix.beer",
+    "bolly4u.shop","downloadhub.contact","9xmovies.com.vu",
+    "mkvcinemas.cat","moviemad.co.com","mp4moviez.glass",
+    "worldfree4u.helpsarkari.com","filmyfly.wales","thekhatrimaza.lol",
+    "2filmywap.com"
+  ];
 
-// Render site checkboxes with saved values from localStorage or checked by default
-function renderSiteCheckboxes() {
-  const selectedSites = JSON.parse(localStorage.getItem("selectedSites") || "[]");
-  const container = document.getElementById("siteCheckboxes");
-  container.innerHTML = allSites.map(site => {
-    const isChecked = selectedSites.length > 0 ? selectedSites.includes(site) : true;
-    return `<label><input type="checkbox" class="siteCheck" value="${site}" ${isChecked ? "checked" : ""}/> ${site}</label>`;
-  }).join("");
-  // Add change event listeners for storing selections
-  document.querySelectorAll(".siteCheck").forEach(cb => cb.addEventListener('change', saveSelectedSites));
-}
-function saveSelectedSites() {
-  const selected = Array.from(document.querySelectorAll('.siteCheck:checked')).map(cb => cb.value);
-  localStorage.setItem("selectedSites", JSON.stringify(selected));
-}
-// Helper to extract main domain from full domain and create wildcard site patterns
-function getWildcardSites() {
-  const sel = JSON.parse(localStorage.getItem("selectedSites") || "[]");
-  const uniqueDomains = new Set();
-  sel.forEach(domain => {
-    // Extract base domain without TLD and subdomains (e.g. filmyzilla.com -> filmyzilla)
-    let match = domain.toLowerCase().match(/^(?:[\w-]+\.)?([\w-]+)\./);
-    if (match && match[1]) uniqueDomains.add(match[1]);
-    else uniqueDomains.add(domain);
-  });
-  // Convert to wildcard form for site: operator: "*.domain.*"
-  return Array.from(uniqueDomains).map(d => `*.${d}.*`);
-}
-// Return list of selected exact domains (checkbox values)
-function getSelectedSites() {
-  return Array.from(document.querySelectorAll('.siteCheck:checked')).map(cb => cb.value);
-}
-
-// Common search function applying wildcard site filters, optional dork/query modifier
-function searchWithSelectedSites(queryModifier = null) {
-  const q = searchInput.value.trim();
-  if (!q) {
-    alert("Type movie or artist name!");
-    return;
+  function renderSiteCheckboxes() {
+    const selectedSites = JSON.parse(localStorage.getItem("selectedSites") || "[]");
+    const container = document.getElementById("siteCheckboxes");
+    container.innerHTML = allSites.map(site => {
+      const isChecked = selectedSites.length ? selectedSites.includes(site) : true;
+      return `<label><input type="checkbox" class="siteCheck" value="${site}" ${isChecked ? "checked" : ""} /> ${site}</label>`;
+    }).join('');
+    document.querySelectorAll(".siteCheck").forEach(cb => cb.addEventListener('change', saveSelectedSites));
   }
-  const wildcardSites = getWildcardSites();
-  if (wildcardSites.length === 0) {
-    alert("Select at least one website!");
-    return;
+  function saveSelectedSites() {
+    const selected = Array.from(document.querySelectorAll('.siteCheck:checked')).map(cb => cb.value);
+    localStorage.setItem("selectedSites", JSON.stringify(selected));
   }
-  let query = `${q} (${wildcardSites.map(site => `site:${site}`).join(' OR ')})`;
-  if (typeof queryModifier === "function") {
-    query = queryModifier(q, wildcardSites);
+  function getWildcardSites() {
+    const sel = JSON.parse(localStorage.getItem("selectedSites") || "[]");
+    const uniqueDomains = new Set();
+    sel.forEach(domain => {
+      let match = domain.toLowerCase().match(/^(?:[\w-]+\.)?([\w-]+)\./);
+      if (match && match[1]) uniqueDomains.add(match[1]);
+      else uniqueDomains.add(domain);
+    });
+    return Array.from(uniqueDomains).map(d => `*.${d}.*`);
   }
-  const engine = document.getElementById("engineSel").value;
-  const safe = document.getElementById("safeSearch").checked;
-  addToHistory(q);
-  window.open(getEngineUrl(engine, query, safe), "_blank");
-}
-
-// Specific search buttons override for advanced queries if needed
-function searchOnSite1() { searchWithSelectedSites(); } // Low Level Search
-function searchOnSite2() { searchWithSelectedSites(); } // High Level Search
-function searchOnSite3() { searchWithSelectedSites(); } // Advanced Search
-function customSearch() {
-  searchWithSelectedSites((q, sites) => {
-    const orSites = sites.map(s => `site:${s}`).join(' OR ');
-    return (
-      ` intitle:"Hindi Dubbed Movie" "${q}" OR `
-      + `filetype:mp4 "Hindi Dubbed Movie" "${q}" OR `
-      + `inurl:watch "Hindi Dubbed Movie" "${q}" OR `
-      + `inurl:stream "Hindi Dubbed Movie" "${q}" OR `
-      + `filetype:torrent "Hindi Dubbed Movie" "${q}" OR `
-      + `filetype:avi "Hindi Dubbed Movie" "${q}" AND (${orSites})`
-    ).replace(/\s+/g, ' ').trim();
-  });
-}
-
-function getEngineUrl(engine, query, safe) {
-  if (engine === "google")
-    return "https://www.google.com/search?q=" + encodeURIComponent(query) + (safe ? "&safe=active" : "");
-  else if (engine === "bing")
-    return "https://www.bing.com/search?q=" + encodeURIComponent(query) + (safe ? "&adlt=strict" : "&adlt=off");
-  else if (engine === "duckduckgo")
-    return "https://duckduckgo.com/?q=" + encodeURIComponent(query) + (safe ? "&kp=1" : "&kp=-2");
-  return "";
-}
-
-function buyMeACoffee() {
-  window.open('https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/', '_blank');
-}
-
-// Matrix animation code
-const c=document.getElementById("matrixbg"),ctx=c.getContext("2d");
-function resizeMatrix(){ c.width=window.innerWidth; c.height=window.innerHeight; }
-resizeMatrix(); window.addEventListener("resize", resizeMatrix);
-const chars = "アカサタナハマヤラワガザダバパイキシチニヒミリギジヂビピウクスツヌフムユルグズヅブプエケセテネヘメレゲゼデベペオコソトノホモヨロゴゾドボポヴンabcdefghijklmnopqrstuvwxyz".split("");
-let fontSize=14, columns, drops;
-function matrixInit(){
-  columns = Math.floor(window.innerWidth / fontSize);
-  drops = Array(columns).fill(1);
-}
-matrixInit();
-window.addEventListener("resize", matrixInit);
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0,0,0,0.09)";
-  ctx.fillRect(0, 0, c.width, c.height);
-  ctx.font = fontSize + "px 'Fira Mono', monospace";
-  for (let i=0; i<drops.length; i++) {
-    const text = chars[Math.floor(Math.random()*chars.length)];
-    ctx.fillStyle = "hsl("+(100+Math.random()*70)+",97%,62%)";
-    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-    if(drops[i]*fontSize > c.height && Math.random() > 0.963) drops[i] = 0;
-    drops[i]++;
+  function getSelectedSites() {
+    return Array.from(document.querySelectorAll('.siteCheck:checked')).map(cb => cb.value);
   }
-}
-setInterval(drawMatrix, 32);
 
-// Mini matrix animation for history background
-const hc=document.getElementById("historyMatrixBg"), hctx=hc.getContext("2d");
-function resizeHistoryMatrix(){
-  let el=document.querySelector('.history-matrix-container');
-  hc.width=el.offsetWidth; hc.height=el.offsetHeight;
-}
-function hmatrixInit(){
-  window.historyCols = Math.floor(hc.width/11);
-  window.historyDrops = Array(window.historyCols).fill(1);
-}
-window.addEventListener("resize", () => { resizeHistoryMatrix(); hmatrixInit(); });
-setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 120);
-function drawHistoryMatrix() {
-  hctx.clearRect(0, 0, hc.width, hc.height);
-  hctx.font = "11px 'Fira Mono', monospace";
-  for(let i=0; i<window.historyCols; i++) {
-    const text = chars[Math.floor(Math.random() * chars.length)];
-    hctx.fillStyle = "hsl("+(110+Math.random()*40)+",97%,52%)";
-    hctx.fillText(text, i * 11, window.historyDrops[i] * 11);
-    if(window.historyDrops[i]*11 > hc.height && Math.random() > 0.97) window.historyDrops[i] = 0;
-    window.historyDrops[i]++;
+  function searchWithSelectedSites(queryModifier = null) {
+    const q = searchInput.value.trim();
+    if (!q) { alert("Type movie or artist name!"); return; }
+    const wildcardSites = getWildcardSites();
+    if (wildcardSites.length === 0) { alert("Select at least one website!"); return; }
+    let query = `${q} (${wildcardSites.map(site => `site:${site}`).join(' OR ')})`;
+    if (typeof queryModifier === "function") {
+      query = queryModifier(q, wildcardSites);
+    }
+    const engine = document.getElementById("engineSel").value;
+    const safe = document.getElementById("safeSearch").checked;
+    addToHistory(q);
+    window.open(getEngineUrl(engine, query, safe), "_blank");
   }
-}
-setInterval(drawHistoryMatrix, 56);
-hmatrixInit();
-setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 420);
+  function searchOnSite1() { searchWithSelectedSites(); }
+  function searchOnSite2() { searchWithSelectedSites(); }
+  function searchOnSite3() { searchWithSelectedSites(); }
+  function customSearch() {
+    searchWithSelectedSites((q, sites) => {
+      const orSites = sites.map(s => `site:${s}`).join(' OR ');
+      return (
+        ` intitle:"Hindi Dubbed Movie" "${q}" OR `
+        + `filetype:mp4 "Hindi Dubbed Movie" "${q}" OR `
+        + `inurl:watch "Hindi Dubbed Movie" "${q}" OR `
+        + `inurl:stream "Hindi Dubbed Movie" "${q}" OR `
+        + `filetype:torrent "Hindi Dubbed Movie" "${q}" OR `
+        + `filetype:avi "Hindi Dubbed Movie" "${q}" AND (${orSites})`
+      ).replace(/\s+/g, ' ').trim();
+    });
+  }
+  function getEngineUrl(engine, query, safe) {
+    if (engine === "google")
+      return "https://www.google.com/search?q=" + encodeURIComponent(query) + (safe ? "&safe=active" : "");
+    else if (engine === "bing")
+      return "https://www.bing.com/search?q=" + encodeURIComponent(query) + (safe ? "&adlt=strict" : "&adlt=off");
+    else if (engine === "duckduckgo")
+      return "https://duckduckgo.com/?q=" + encodeURIComponent(query) + (safe ? "&kp=1" : "&kp=-2");
+    return "";
+  }
+  function buyMeACoffee() {
+    window.open('https://khilesh114.github.io/MULTI_SITE_FILMS_SEARCH_INGINE/', '_blank');
+  }
 
-// Suggestion/autocomplete logic
-const searchInput = document.getElementById("searchInput");
-const suggBox = document.getElementById("suggestions");
-let currSuggIdx = -1;
-function showSuggestions(){
-  const val = searchInput.value.trim().toLowerCase();
-  let hist = JSON.parse(localStorage.getItem("filmHackHist")||"[]");
-  if(val.length<1) { suggBox.style.display="none"; currSuggIdx=-1; return; }
-  let matches = hist.filter(q => q.toLowerCase().includes(val));
-  if(matches.length===0){ suggBox.style.display="none"; currSuggIdx=-1; return; }
-  suggBox.innerHTML = matches.map((h,i) =>
-    `<button class="sugg" type="button" tabindex="0" data-sidx="${i}" role="option">${h.replace(new RegExp(val,"ig"), (m) => "<mark style='color:#18ffee;background:transparent;'>" + m + "</mark>")}</button>`
-  ).join('');
-  suggBox.style.display = 'block';
-  currSuggIdx = -1;
-}
-suggBox.addEventListener('mousedown', e => {
-  let t = e.target.closest('.sugg');
-  if(!t) return;
-  searchInput.value = t.innerText;
-  suggBox.style.display = 'none';
-  searchInput.focus();
-});
-searchInput.addEventListener("input", showSuggestions);
-searchInput.addEventListener("focus", showSuggestions);
-searchInput.addEventListener("blur", () => { setTimeout(() => { suggBox.style.display='none'; }, 120); });
-searchInput.addEventListener("keydown", e => {
-  if(suggBox.style.display !== "block") return;
-  let items = Array.from(suggBox.children);
-  if(e.key === "ArrowDown") {
-    currSuggIdx = (currSuggIdx+1) % items.length;
-    items.forEach(b => b.classList.remove("active"));
-    items[currSuggIdx].classList.add("active");
-    e.preventDefault();
-  } else if(e.key === "ArrowUp") {
-    currSuggIdx = (currSuggIdx-1 + items.length) % items.length;
-    items.forEach(b => b.classList.remove("active"));
-    items[currSuggIdx].classList.add("active");
-    e.preventDefault();
-  } else if(e.key === "Enter" || e.key === "Tab") {
-    if(currSuggIdx > -1 && items[currSuggIdx]) {
-      searchInput.value = stripHtml(items[currSuggIdx].innerHTML);
-      suggBox.style.display = 'none';
-      setTimeout(() => searchInput.focus(), 90);
-      e.preventDefault();
+  /* Matrix background animation - unchanged from prior code */
+  const c = document.getElementById("matrixbg"), ctx = c.getContext("2d");
+  function resizeMatrix() { c.width = window.innerWidth; c.height = window.innerHeight; }
+  resizeMatrix(); window.addEventListener("resize", resizeMatrix);
+  const chars = "アカサタナハマヤラワガザダバパイキシチニヒミリギジヂビピウクスツヌフムユルグズヅブプエケセテネヘメレゲゼデベペオコソトノホモヨロゴゾドボポヴンabcdefghijklmnopqrstuvwxyz".split("");
+  let fontSize = 14, columns, drops;
+  function matrixInit() {
+    columns = Math.floor(window.innerWidth / fontSize);
+    drops = Array(columns).fill(1);
+  }
+  matrixInit();
+  window.addEventListener("resize", matrixInit);
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0,0,0,0.09)";
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.font = fontSize + "px 'Fira Mono', monospace";
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillStyle = "hsl(" + (100 + Math.random() * 70) + ",97%,62%)";
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > c.height && Math.random() > 0.963) drops[i] = 0;
+      drops[i]++;
     }
   }
-});
-function stripHtml(h){
-  let tmp=document.createElement("div");
-  tmp.innerHTML=h;
-  return tmp.textContent || tmp.innerText || "";
-}
+  setInterval(drawMatrix, 32);
 
-// Search history management
-function addToHistory(txt) {
-  if(!txt.trim()) return;
-  let hist = JSON.parse(localStorage.getItem("filmHackHist")||"[]");
-  if(hist[0] !== txt) hist.unshift(txt);
-  hist = Array.from(new Set(hist));
-  localStorage.setItem("filmHackHist", JSON.stringify(hist));
-  renderHistory();
-}
-function renderHistory() {
-  let hist = JSON.parse(localStorage.getItem("filmHackHist")||"[]");
-  const historyList = document.getElementById("historyList");
-  historyList.innerHTML = hist.length ? ("Recent: " + hist.slice(0, 5).map(h =>
-    `<span tabindex="0" onclick="setQ('${h.replace(/'/g,"&#39;")}')" onkeydown="if(event.key==='Enter'){setQ('${h.replace(/'/g,"&#39;")}')}" role="button" aria-label="Repeat search: ${h}">${h}</span>`
-  ).join(", ")) : "";
-  setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 40);
-}
-function setQ(q) {
-  searchInput.value = q;
-  suggBox.style.display = 'none';
-  searchInput.focus();
-}
-function downloadHistory() {
-  let hist = JSON.parse(localStorage.getItem("filmHackHist")||"[]");
-  if(!hist.length) { alert('No search history!'); return; }
-  let txt = hist.map((h,i) => `${i+1}. ${h}`).join('\n');
-  let blob = new Blob([txt], {type:'text/plain'});
-  let a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'search_history.txt';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => { document.body.removeChild(a); }, 200);
-}
-
-// Theme toggle
-const themeBtn = document.getElementById("themeToggleBtn");
-themeBtn.onclick = () => {
-  document.body.classList.toggle("day-mode");
-  if(document.body.classList.contains("day-mode")) {
-    themeBtn.innerText = "🌞";
-    themeBtn.setAttribute("aria-pressed", "true");
-  } else {
-    themeBtn.innerText = "🌙";
-    themeBtn.setAttribute("aria-pressed", "false");
+  /* Search History animations and autocomplete, download, theme toggle etc. kept as before */
+  const suggBox = document.getElementById("suggestions");
+  let currSuggIdx = -1;
+  function showSuggestions() {
+    const val = searchInput.value.trim().toLowerCase();
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    if (val.length < 1) { suggBox.style.display = "none"; currSuggIdx = -1; return; }
+    let matches = hist.filter(q => q.toLowerCase().includes(val));
+    if (matches.length === 0) { suggBox.style.display = "none"; currSuggIdx = -1; return; }
+    suggBox.innerHTML = matches.map((h, i) =>
+      `<button class="sugg" type="button" tabindex="0" data-sidx="${i}" role="option">${h.replace(new RegExp(val, "ig"), (m) => "<mark style='color:#18ffee;background:transparent;'>" + m + "</mark>")}</button>`
+    ).join('');
+    suggBox.style.display = 'block';
+    currSuggIdx = -1;
   }
-};
+  suggBox.addEventListener('mousedown', e => {
+    let t = e.target.closest('.sugg');
+    if (!t) return;
+    searchInput.value = t.innerText;
+    suggBox.style.display = 'none';
+    searchInput.focus();
+  });
+  searchInput.addEventListener("input", showSuggestions);
+  searchInput.addEventListener("focus", showSuggestions);
+  searchInput.addEventListener("blur", () => { setTimeout(() => { suggBox.style.display = 'none'; }, 120); });
+  searchInput.addEventListener("keydown", e => {
+    if (suggBox.style.display !== "block") return;
+    let items = Array.from(suggBox.children);
+    if (e.key === "ArrowDown") {
+      currSuggIdx = (currSuggIdx + 1) % items.length;
+      items.forEach(b => b.classList.remove("active"));
+      items[currSuggIdx].classList.add("active");
+      e.preventDefault();
+    } else if (e.key === "ArrowUp") {
+      currSuggIdx = (currSuggIdx - 1 + items.length) % items.length;
+      items.forEach(b => b.classList.remove("active"));
+      items[currSuggIdx].classList.add("active");
+      e.preventDefault();
+    } else if (e.key === "Enter" || e.key === "Tab") {
+      if (currSuggIdx > -1 && items[currSuggIdx]) {
+        searchInput.value = stripHtml(items[currSuggIdx].innerHTML);
+        suggBox.style.display = 'none';
+        setTimeout(() => searchInput.focus(), 90);
+        e.preventDefault();
+      }
+    }
+  });
+  function stripHtml(h) { let tmp = document.createElement("div"); tmp.innerHTML = h; return tmp.textContent || tmp.innerText || ""; }
 
-// On Enter key, trigger Low Level Search if no suggestion is showing
-searchInput.addEventListener("keydown", function(e) {
-  if(e.key === "Enter" && (!suggBox.style.display || suggBox.style.display === "none")) {
-    searchOnSite1();
+  function addToHistory(txt) {
+    if (!txt.trim()) return;
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    if (hist[0] !== txt) hist.unshift(txt);
+    hist = Array.from(new Set(hist));
+    localStorage.setItem("filmHackHist", JSON.stringify(hist));
+    renderHistory();
   }
-});
-
-window.onload = () => {
-  renderHistory();
-  renderSiteCheckboxes();
-};
+  function renderHistory() {
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    const historyList = document.getElementById("historyList");
+    historyList.innerHTML = hist.length ? ("Recent: " + hist.slice(0, 5).map(h =>
+      `<span tabindex="0" onclick="setQ('${h.replace(/'/g, "&#39;")}')" onkeydown="if(event.key==='Enter'){setQ('${h.replace(/'/g, "&#39;")}')}" role="button" aria-label="Repeat search: ${h}">${h}</span>`
+    ).join(", ")) : "";
+    setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 40);
+  }
+  function setQ(q) {
+    searchInput.value = q;
+    suggBox.style.display = 'none';
+    searchInput.focus();
+  }
+  function downloadHistory() {
+    let hist = JSON.parse(localStorage.getItem("filmHackHist") || "[]");
+    if (!hist.length) { alert('No search history!'); return; }
+    let txt = hist.map((h, i) => `${i + 1}. ${h}`).join('\n');
+    let blob = new Blob([txt], { type: 'text/plain' });
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'search_history.txt';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); }, 200);
+  }
+  // Theme toggle button
+  const themeBtn = document.getElementById("themeToggleBtn");
+  themeBtn.onclick = () => {
+    document.body.classList.toggle("day-mode");
+    if (document.body.classList.contains("day-mode")) {
+      themeBtn.innerText = "🌞";
+      themeBtn.setAttribute("aria-pressed", "true");
+    } else {
+      themeBtn.innerText = "🌙";
+      themeBtn.setAttribute("aria-pressed", "false");
+    }
+  };
+  // On Enter key, trigger Low Level Search if no suggestion is showing
+  searchInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && (!suggBox.style.display || suggBox.style.display === "none")) {
+      searchOnSite1();
+    }
+  });
+  // Mini matrix setup functions — keep as your previous code for history matrix animation
+  const hc = document.getElementById("historyMatrixBg"), hctx = hc.getContext("2d");
+  function resizeHistoryMatrix() {
+    let el = document.querySelector('.history-matrix-container');
+    hc.width = el.offsetWidth; hc.height = el.offsetHeight;
+  }
+  function hmatrixInit() {
+    window.historyCols = Math.floor(hc.width / 11);
+    window.historyDrops = Array(window.historyCols).fill(1);
+  }
+  window.addEventListener("resize", () => { resizeHistoryMatrix(); hmatrixInit(); });
+  setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 120);
+  function drawHistoryMatrix() {
+    hctx.clearRect(0, 0, hc.width, hc.height);
+    hctx.font = "11px 'Fira Mono', monospace";
+    for (let i = 0; i < window.historyCols; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      hctx.fillStyle = "hsl(" + (110 + Math.random() * 40) + ",97%,52%)";
+      hctx.fillText(text, i * 11, window.historyDrops[i] * 11);
+      if (window.historyDrops[i] * 11 > hc.height && Math.random() > 0.97) window.historyDrops[i] = 0;
+      window.historyDrops[i]++;
+    }
+  }
+  setInterval(drawHistoryMatrix, 56);
+  hmatrixInit();
+  setTimeout(() => { resizeHistoryMatrix(); hmatrixInit(); }, 420);
+  // Initialize on page load
+  window.onload = () => {
+    renderHistory();
+    renderSiteCheckboxes();
+  };
 </script>
 
 </body>
